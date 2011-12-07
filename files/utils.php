@@ -88,8 +88,6 @@ class utils {
     /**
      * Checks if page exists
      *
-     * @global <String> $wgServerName
-     * @global <String> $wgScriptPath
      * @param <String> $pageName
      * @return <bool>
      */
@@ -278,8 +276,6 @@ This is a patch of the article: [[onPage::'.$onPage.']]
     /**
      *Used to get the id of the last patch(es) of the given article
      *
-     * @global <String> $wgServerName
-     * @global <String> $wgScriptPath
      * @param <String> $pageName
      * @param <String> $url
      * @return <array or String> the last patch id
@@ -511,15 +507,15 @@ This is a patch of the article: [[onPage::'.$onPage.']]
     /**
      * Creates a pushfeed
      *
-     * @global <String> $wgServerName
+     * @global <String> $wgServer
      * @global <String> $wgScriptPath
      * @param <String> $name pushfeed name
      * @param <String> $request
      * @return <bool> true if creation successful, false if not
      */
     static function createPushFeed($name, $request) {
-        global $wgServerName, $wgScriptPath, $wgScriptExtension;
-        $urlServer = 'http://'.$wgServerName.$wgScriptPath."/index{$wgScriptExtension}";
+        global $wgServer, $wgScriptPath, $wgScriptExtension;
+        $urlServer = $wgServer.$wgScriptPath."/index{$wgScriptExtension}";
         $stringReq = utils::encodeRequest($request);//avoid "semantic injection"
         $newtext = "
 {{#form:action=".$urlServer."?action=onpush|method=POST|
@@ -563,8 +559,6 @@ Pages concerned:
     /**
      *Gets the pulled patches for a given pullfeed
      *
-     * @global <String> $wgServerName
-     * @global <String> $wgScriptPath
      * @param <String> $pfname pullfeed name
      * @return <array> pulled patches
      */
@@ -592,8 +586,6 @@ Pages concerned:
     /**
      * returns an array of patches ordered by previous
      *
-     * @global <String> $wgServerName
-     * @global <String> $wgScriptPath
      * @param <String> $title of an article page
      * @param <String> $previousPatch
      * @return <array> patch list

@@ -14,8 +14,8 @@ function integrate($changeSetId,$patchIdList,$relatedPushServer, $csName) {
 //global $wgScriptExtension;
 // $patchIdList = getPatchIdList($changeSetId);
 //  $lastPatch = utils::getLastPatchId($pageName);
-    global $wgServerName,$wgScriptPath,$wgScriptExtension,$wgOut;
-    $urlServer = 'http://'.$wgServerName.$wgScriptPath."/index.php/$csName";
+    global $wgServer,$wgScriptPath,$wgScriptExtension,$wgOut;
+    $urlServer = $wgServer.$wgScriptPath."/index.php/$csName";
     wfDebugLog('p2p', '@@@@@@@@@@@@@@@@@@@ - function integrate : ' . $changeSetId);
     $i = 1;
     $j = count($patchIdList);
@@ -105,7 +105,7 @@ function integrate($changeSetId,$patchIdList,$relatedPushServer, $csName) {
 
             if (!in_array($onPage, $pages)) {
                 $onPage1 = str_replace(array(' '), array('_'), $onPage);
-                utils::writeAndFlush("<span style=\"margin-left:60px;\">Page: <A HREF=" . 'http://' . $wgServerName . $wgScriptPath . "/index.php/$onPage1>" . $onPage . "</A></span><br/>");
+                utils::writeAndFlush("<span style=\"margin-left:60px;\">Page: <A HREF=" . $wgServer . $wgScriptPath . "/index.php/$onPage1>" . $onPage . "</A></span><br/>");
                 $pages[] = $onPage;
             }
             if ($sub === 'ATT') {
@@ -127,7 +127,7 @@ function integrate($changeSetId,$patchIdList,$relatedPushServer, $csName) {
                 }
                 unlink(utils::prepareString($Mime,$Size,$Url));
             }
-            utils::writeAndFlush("<span style=\"margin-left:80px;\">" . $i . "/" . $j . ": Integration of Patch: <A HREF=" . 'http://' . $wgServerName . $wgScriptPath . "/index.php/$patchId>" . $patchId . "</A></span><br/>");
+            utils::writeAndFlush("<span style=\"margin-left:80px;\">" . $i . "/" . $j . ": Integration of Patch: <A HREF=" . $wgServer . $wgScriptPath . "/index.php/$patchId>" . $patchId . "</A></span><br/>");
             
             if ($sub === 'ATT') {
                 $rev = logootIntegrateAtt($onPage, $edit);
@@ -335,8 +335,7 @@ function logootIntegrateAtt($article, $edit) {
 }
 
 function downloadFile($url) {
-    global $wgServerName, $wgServer, $wgContLang, $wgAuth, $wgScriptPath,
-    $wgScriptExtension, $wgMemc, $wgRequest;
+    global $wgServer, $wgContLang, $wgAuth, $wgScriptPath, $wgScriptExtension, $wgMemc, $wgRequest;
 
     $apiUrl = $wgServer.$wgScriptPath."/api".$wgScriptExtension;
 

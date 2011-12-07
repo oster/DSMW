@@ -32,13 +32,13 @@ class DSMWAdmin extends SpecialPage {
      * is displayed on the psecial page
      *
      * @global <Object> $wgOut Output page instance
-     * @global <String> $wgServerName
+     * @global <String> $wgServer
      * @global <String> $wgScriptPath
      * @return <bool>
      */
     function execute() {
-        global $wgOut, $wgRequest, $wgServerName, $wgScriptPath, $wgDSMWIP, $wgServerName, $wgScriptPath;/*, $wgSitename, $wgCachePages, $wgUser, $wgTitle, $wgDenyAccessMessage, $wgAllowAnonUsers, $wgRequest, $wgMessageCache, $wgWatchingMessages, $wgDBtype, $namespace_titles;*/
-        $urlServer = 'http://'.$wgServerName.$wgScriptPath;
+        global $wgOut, $wgRequest, $wgServer, $wgScriptPath, $wgDSMWIP, $wgScriptPath;/*, $wgSitename, $wgCachePages, $wgUser, $wgTitle, $wgDenyAccessMessage, $wgAllowAnonUsers, $wgRequest, $wgMessageCache, $wgWatchingMessages, $wgDBtype, $namespace_titles;*/
+        $urlServer = $wgServer.$wgScriptPath;
        
 
             /**** Get status of refresh job, if any ****/

@@ -17,8 +17,8 @@ class DSMWUpdateJob extends Job {
     }
 
     function run() {
-        global $wgServerName,$wgScriptPath, $wgServer, $wgScriptExtension;
-        $urlServer = 'http://'.$wgServerName;
+        global $wgServer, $wgScriptPath, $wgServer, $wgScriptExtension;
+        $urlServer = $wgServer;
         wfProfileIn('DSMWUpdateJob::run()');
         $revids = array();
         $revids1 = array();

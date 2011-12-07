@@ -15,7 +15,7 @@ function integrateUndo($patchIdList,$relatedPushServer/*, $csName*/) {
 //global $wgScriptExtension;
 // $patchIdList = getPatchIdList($changeSetId);
 //  $lastPatch = utils::getLastPatchId($pageName);
-    global $wgServerName,$wgScriptPath,$wgScriptExtension,$wgOut;
+    global $wgServer, $wgScriptPath,$wgScriptExtension,$wgOut;
     //$urlServer = 'http://'.$wgServerName.$wgScriptPath."/index.php/$csName";
     //wfDebugLog('p2p', '@@@@@@@@@@@@@@@@@@@ - function integrateUndo : ' . $csName);
     $i = 1;
@@ -97,7 +97,7 @@ function integrateUndo($patchIdList,$relatedPushServer/*, $csName*/) {
 
             if (!in_array($onPage, $pages)) {
                 $onPage1 = str_replace(array(' '), array('_'), $onPage);
-                utils::writeAndFlush("<span style=\"margin-left:60px;\">Page: <A HREF=" . 'http://' . $wgServerName . $wgScriptPath . "/index.php/$onPage1>" . $onPage . "</A></span><br/>");
+                utils::writeAndFlush("<span style=\"margin-left:60px;\">Page: <A HREF=" . $wgServer . $wgScriptPath . "/index.php/$onPage1>" . $onPage . "</A></span><br/>");
                 $pages[] = $onPage;
             }
 
@@ -130,7 +130,7 @@ function integrateUndo($patchIdList,$relatedPushServer/*, $csName*/) {
             }
             
             */
-            utils::writeAndFlush("<span style=\"margin-left:80px;\">" . $i . "/" . $j . ": Integration of Patch: <A HREF=" . 'http://' . $wgServerName . $wgScriptPath . "/index.php/$newPatchID>" . $newPatchID . "</A></span><br/>");
+            utils::writeAndFlush("<span style=\"margin-left:80px;\">" . $i . "/" . $j . ": Integration of Patch: <A HREF=" . $wgServer . $wgScriptPath . "/index.php/$newPatchID>" . $newPatchID . "</A></span><br/>");
 /*
             if ($sub === 'ATT') {
                 $rev = logootIntegrateAtt($onPage, $edit);

@@ -31,13 +31,13 @@ class DSMWUndoAdmin extends SpecialPage {
      * Displays a research form to allow first search of the patchs he wants to remove
      *
      * @global <Object> $wgOut Output page instance
-     * @global <String> $wgServerName
+     * @global <String> $wgServer
      * @global <String> $wgScriptPath
      * @return <bool>
      */
     function execute() {
-        global $wgOut, $wgRequest, $wgServerName, $wgScriptPath, $wgDSMWIP, $wgServer, $wgScriptPath, $wgScriptExtension;
-        $urlServer = 'http://'.$wgServerName.$wgScriptPath;
+        global $wgOut, $wgRequest, $wgServer, $wgScriptPath, $wgDSMWIP, $wgServer, $wgScriptPath, $wgScriptExtension;
+        $urlServer = $wgServer.$wgScriptPath;
         $output = '';//initialisation of $output as an empty string
 
         $output .= '<p><b>Result:</b></p>';//we add the xhtml code wich should be displayed into $output

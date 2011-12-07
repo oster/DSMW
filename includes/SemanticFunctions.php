@@ -8,8 +8,6 @@
 /**
  * Returns an array of page titles received via the request
  *
- * @global <String> $wgServerName
- * @global <String> $wgScriptPath
  * @param <String> $request
  * @return <array>
  */
@@ -38,8 +36,6 @@ function getRequestedPages($request) {
 /**
  *Gets the semantic request stored in the PushFeed page
  *
- * @global <String> $wgServerName
- * @global <String> $wgScriptPath
  * @param <String> $pfName pushfeed name
  * @return <String>
  */
@@ -68,14 +64,13 @@ function getPushFeedRequest($pfName) {
 
 /**
  *Gets the previous changeSet ID (in the push action sequence)
- * @global <String> $wgServerName
  * @global <String> $wgScriptPath
  * @param <String> $pfName PushFeed name
  * @return <String> previous changeSet ID
  */
 //function getPreviousCSID($pfName) {
-//    global $wgServerName, $wgScriptPath;
-//    $url = 'http://'.$wgServerName.$wgScriptPath.'/index.php';
+//    global $wgServer, $wgScriptPath;
+//    $url = $wgServer.$wgScriptPath.'/index.php';
 //    $req = '[[ChangeSet:+]] [[inPushFeed::'.$pfName.']]';
 //    $req = utils::encodeRequest($req);
 //    $url = $url."/Special:Ask/".$req."/-3FchangeSetID/headers=hide/order=desc/format=csv/limit=1";
@@ -91,8 +86,6 @@ function getPushFeedRequest($pfName) {
 /**
  * Gets the published patches
  *
- * @global <String> $wgServerName
- * @global <String> $wgScriptPath
  * @param <String> $pfname PushFeed name
  * @return <array> array of the published patches' name
  */
@@ -164,8 +157,6 @@ function updatePushFeed($name, $CSID) {
 /**
  * Gets the last changeset(haspullhead) linked with the given pullfeed
  *
- * @global <String> $wgServerName
- * @global <String> $wgScriptPath
  * @param <String> $pfName pullfeed name
  * @return <String or bool> false if no pullhead
  */
@@ -195,8 +186,6 @@ function getHasPullHead($pfName) {//pullfeed name with ns
  * Gets the last changeset(haspushhead) linked with the given pushfeed
  *
  *
- * @global <String> $wgServerName
- * @global <String> $wgScriptPath
  * @param <String> $pfName pushfeed name
  * @return <String or bool> false if no pushhead
  */
@@ -225,8 +214,6 @@ function getHasPushHead($pfName) {//pushfeed name with ns
 /**
  *Gest the name of the push where the pullfeed has subscribed
  *
- * @global <type> $wgServerName
- * @global <type> $wgScriptPath
  * @param <type> $name pullfeed name
  * @return <type> pushfeed name
  */
@@ -255,8 +242,6 @@ function getPushName($name) {//pullfeed name with NS
 /**
  * Gets the URL of the pushfeed where the pullfeed has subscribed
  *
- * @global <String> $wgServerName
- * @global <String> $wgScriptPath
  * @param <String> $name pullfeed name
  * @return <String> Pushfeed Url
  */

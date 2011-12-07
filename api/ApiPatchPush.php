@@ -29,8 +29,6 @@ class ApiPatchPush extends ApiQueryBase {
         return $req;
     }
     private function run() {
-        global $wgServerName, $wgScriptPath;
-
         $params = $this->extractRequestParams();
         wfDebugLog('p2p',' - ApiQueryPatchPushed params '.$params['pushName']);
 

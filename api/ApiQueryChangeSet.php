@@ -28,8 +28,8 @@ class ApiQueryChangeSet extends ApiQueryBase {
         return $req;
     }
     private function run() {
-        global $wgServerName, $wgScriptPath;
-        wfDebugLog('p2p','@@@@@@@@@@@@@@@@@@@@ ApiQueryChangeSet : $wgServerName, $wgScriptPath');
+        global $wgServer, $wgScriptPath;
+        wfDebugLog('p2p','@@@@@@@@@@@@@@@@@@@@ ApiQueryChangeSet : $wgServer, $wgScriptPath');
         $params = $this->extractRequestParams();
 
        

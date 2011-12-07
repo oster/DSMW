@@ -206,9 +206,9 @@ function conflict(&$editor, &$out) {
  * @return <boolean>
  */
 function onUnknownAction($action, $article) {
-    global $wgOut, $wgServerName, $wgScriptPath, $wgUser, $wgScriptExtension, $wgDSMWIP;
-    $urlServer = 'http://' . $wgServerName . $wgScriptPath . "/index{$wgScriptExtension}";
-    $urlAjax = 'http://'.$wgServerName.$wgScriptPath;
+    global $wgOut, $wgServer, $wgScriptPath, $wgUser, $wgScriptExtension, $wgDSMWIP;
+    $urlServer = $wgServer . $wgScriptPath . "/index{$wgScriptExtension}";
+    $urlAjax =  $wgServer.$wgScriptPath;
     
     //////////pull form page////////
     if (isset($_GET['action']) && $_GET['action'] == 'addpullpage') {
@@ -363,7 +363,7 @@ The \"PUSH\" action publishes the (unpublished) modifications of the articles li
 
             if (!$articlename->exists()) {
                 $result = utils::createPushFeed($_POST['name'], $_POST['request']);
-                utils::writeAndFlush("Create push <A HREF=" . 'http://' . $wgServerName . $wgScriptPath . "/index.php?title=".$_POST['name'].">" . $_POST['name'] . "</a>");
+                utils::writeAndFlush("Create push <A HREF=" . $wgServer . $wgScriptPath . "/index.php?title=".$_POST['name'].">" . $_POST['name'] . "</a>");
                 if ($result == false) {
                     throw new MWException(
                             __METHOD__ . ': no Pushfeed created in utils:: createPushFeed:
@@ -396,7 +396,7 @@ The \"PUSH\" action publishes the (unpublished) modifications of the articles li
         //$name = $name1[0];
         utils::writeAndFlush('<p><b>Start push </b></p>');
         foreach ($name1 as $name) {
-            utils::writeAndFlush("<span style=\"margin-left:30px;\">begin push: <A HREF=" . 'http://' . $wgServerName . $wgScriptPath . "/index.php?title=$name>" . $name . "</a></span> <br/>");
+            utils::writeAndFlush("<span style=\"margin-left:30px;\">begin push: <A HREF=" . $wgServer . $wgScriptPath . "/index.php?title=$name>" . $name . "</a></span> <br/>");
             $patches = array();  //// for each pushfeed name==> push
             wfDebugLog('p2p', '  -> pushname ' . $name);
             // $name = $_GET['name'];//PushFeed name
@@ -569,7 +569,7 @@ The \"PULL\" action gets the modifications published in the PushFeed of the Push
         //$name = $name1[0];//with NS
         utils::writeAndFlush('<p><b>Start pull</b></p>');
         foreach ($name1 as $name) {// for each pullfeed name==> pull
-            utils::writeAndFlush("<span style=\"margin-left:30px;\">begin pull: <A HREF=" . 'http://' . $wgServerName . $wgScriptPath . "/index.php?title=$name>" . $name . "</a></span> <br/>");
+            utils::writeAndFlush("<span style=\"margin-left:30px;\">begin pull: <A HREF=" . $wgServer . $wgScriptPath . "/index.php?title=$name>" . $name . "</a></span> <br/>");
             wfDebugLog('p2p', '      -> pull : ' . $name);
 
             //        $previousCSID = getPreviousPulledCSID($name);
@@ -692,7 +692,7 @@ The \"PULL\" action gets the modifications published in the PushFeed of the Push
     elseif (isset($_POST['action']) && $_POST['action'] == 'onundo') {
         
         $patches = array();
-        $urlServer = 'http://'.$wgServerName.$wgScriptPath;
+        $urlServer = $wgServer.$wgScriptPath;
         $title = 'Special:DSMWUndoAdmin';
 
         //if it has been called to display the patches researched
@@ -802,7 +802,7 @@ The \"PULL\" action gets the modifications published in the PushFeed of the Push
                     $output .= '</table></div>';
                     $output .= '<p><h2>Actions:</h2></p>';
 
-                    $url = "http://".$wgServerName.$wgScriptPath."/index{$wgScriptExtension}";
+                    $url = $wgServer.$wgScriptPath."/index{$wgScriptExtension}";
                     $output .= '
                     <form  name="formUndo">
                     <table >
@@ -859,7 +859,7 @@ The \"PULL\" action gets the modifications published in the PushFeed of the Push
                 
                 integrateUndo($patches, $urlServer/*, $csName*/);//will execute the integration of the patches
                 
-                wfDebugLog('p2p', "@@@@@@@@@@@@@@@@@@@@@   attemptUndo :  $wgServerName, $wgScriptPath - ");
+                wfDebugLog('p2p', "@@@@@@@@@@@@@@@@@@@@@   attemptUndo :  $wgServer, $wgScriptPath - ");
                 }
 
         utils::writeAndFlush('<p><b>End undo</b></p>');
@@ -915,10 +915,10 @@ function compareMWVersion($version1, $version2='1.14.0') {
 /* * *************************************************************************** */
 
 function attemptSave($editpage) {
-    global $wgServerName, $wgScriptPath;
-    $urlServer = 'http://' . $wgServerName . $wgScriptPath;
+    global $wgServer, $wgScriptPath;
+    $urlServer = $wgServer . $wgScriptPath;
 
-	wfDebugLog('p2p', "@@@@@@@@@@@@@@@@@@@@@   attemptSave :  $wgServerName, $wgScriptPath - ");
+	wfDebugLog('p2p', "@@@@@@@@@@@@@@@@@@@@@   attemptSave :  $wgServer, $wgScriptPath - ");
 
     $ns = $editpage->mTitle->getNamespace();
     if (($ns == PATCH) || ($ns == PUSHFEED) || ($ns == PULLFEED) || ($ns == CHANGESET)) return true;
@@ -1070,8 +1070,8 @@ function cmpDateStr($date1, $date2)
 /////////////////////////BEN/////////////////////////
 
 function uploadComplete($image) {
-    global $wgServerName, $wgScriptPath, $wgServer,$wgVersion;
-    $urlServer = 'http://' . $wgServerName . $wgScriptPath;
+    global $wgServer, $wgScriptPath, $wgServer,$wgVersion;
+    $urlServer = $wgServer . $wgScriptPath;
 
     //$classe = get_class($image);
     if (compareMWVersion($wgVersion, '1.16.0') == -1) {

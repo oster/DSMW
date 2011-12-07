@@ -34,7 +34,7 @@ class DSMWGeneralExhibits extends SpecialPage {
      * 
      */
     function execute() {
-        global $wgOut, $wgRequest, $wgServerName, $wgScriptPath, $wgDSMWIP, $wgServerName, $wgScriptPath;
+        global $wgOut, $wgRequest, $wgServer, $wgScriptPath, $wgDSMWIP, $wgScriptPath;
 
         //If the Semantic Results Format isn't installed, a blank warning page appears
 //        if (!defined('SRF_VERSION')) {

@@ -33,15 +33,15 @@ class ArticleAdminPage extends SpecialPage {
      * is displayed on the psecial page
      *
      * @global <Object> $wgOut Output page instance
-     * @global <String> $wgServerName
+     * @global <String> $wgServer
      * @global <String> $wgScriptPath
      * @return <bool>
      */
     function execute() {
-        global $wgOut, $wgServerName, $wgScriptPath, $wgScriptExtension;/*, $wgSitename, $wgCachePages, $wgUser, $wgTitle, $wgDenyAccessMessage, $wgAllowAnonUsers, $wgRequest, $wgMessageCache, $wgWatchingMessages, $wgDBtype, $namespace_titles;*/
+        global $wgOut, $wgServer, $wgScriptPath, $wgScriptExtension;/*, $wgSitename, $wgCachePages, $wgUser, $wgTitle, $wgDenyAccessMessage, $wgAllowAnonUsers, $wgRequest, $wgMessageCache, $wgWatchingMessages, $wgDBtype, $namespace_titles;*/
 
-        $url = 'http://'.$wgServerName.$wgScriptPath."/index{$wgScriptExtension}";
-        $urlServer = 'http://'.$wgServerName.$wgScriptPath;
+        $url = $wgServer.$wgScriptPath."/index{$wgScriptExtension}";
+        $urlServer = $wgServer.$wgScriptPath;
         //$wgOut->addHeadItem('script', ArticleAdminPage::javascript());
 
 
@@ -336,16 +336,16 @@ $output .= '    <td align="center" title="Local patches">['.$countPulledPatch.']
      *
      * @global <Object> $wgOut output page instance
      * @global <Object> $wgCachePages
-     * @global <String> $wgServerName
+     * @global <String> $wgServer
      * @global <String> $wgScriptPath
      * @param <String> $action
      * @param <Object> $article
      * @return <bool>
      */
     function onUnknownAction($action, $article) {
-        global $wgOut, $wgCachePages, $wgServerName, $wgScriptPath, $wgScriptExtension;
+        global $wgOut, $wgCachePages, $wgServer, $wgScriptPath, $wgScriptExtension;
 
-        $urlServer = 'http://'.$wgServerName.$wgScriptPath;
+        $urlServer = $wgServer.$wgScriptPath;
 
         $wgCachePages = false;
         //Verify that the action coming in is "admin"
@@ -448,7 +448,7 @@ $wgOut->addWikiText('[[Special:ArticleAdminPage|DSMW Admin functions]]
                     //count the number of published patchs by the current pushFeed for the current page
                     $published = utils::getPublishedPatchs($urlServer, $pushName, $title);
 
-                    //$publishedInPush = utils::getSemanticRequest('http://'.$wgServerName.$wgScriptPath, '', $param);
+                    //$publishedInPush = utils::getSemanticRequest($wgServer.$wgScriptPath, '', $param);
                     //count the number of unpublished patchs
                     $unpublished = array_diff($patchs, $published);
                     if(!is_null($unpublished) && count($unpublished)>0) {
@@ -532,7 +532,7 @@ $wgOut->addWikiText('[[Special:ArticleAdminPage|DSMW Admin functions]]
             }//end if empty $pulls
 
             //part push page
-            $url = "http://".$wgServerName.$wgScriptPath."/index{$wgScriptExtension}";
+            $url = $wgServer.$wgScriptPath."/index{$wgScriptExtension}";
             $output .= '
 <h2>Actions</h2>
 <div><FORM  name="formPush">
@@ -573,15 +573,15 @@ $wgOut->addWikiText('[[Special:ArticleAdminPage|DSMW Admin functions]]
      * Defines the "Article Admin tab"
      *
      * @global <type> $wgRequest
-     * @global <type> $wgServerName
+     * @global <type> $wgServer
      * @global <type> $wgScriptPath
      * @param <type> $skin
      * @param <type> $content_actions
      * @return <type>
      */
     function onSkinTemplateTabs($skin, $content_actions) {
-        global $wgRequest, $wgServerName, $wgScriptPath;
-        $urlServer = 'http://'.$wgServerName.$wgScriptPath;
+        global $wgRequest, $wgServer, $wgScriptPath;
+        $urlServer = $wgServer.$wgScriptPath;
 
         $action = $wgRequest->getText("action");
         $db = &wfGetDB(DB_SLAVE);
